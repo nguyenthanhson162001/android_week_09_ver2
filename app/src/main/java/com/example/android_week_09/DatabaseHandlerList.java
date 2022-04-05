@@ -65,4 +65,23 @@ public class DatabaseHandlerList extends SQLiteOpenHelper {
         }
         return persons;
     }
+    public boolean deletePerson(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DatabaseHandlerList.TABLE_NAMES, KEY_ID + " = ?",
+                new String[] { String.valueOf(id) });
+        db.close();
+    return true;
+    }
+    // code to update the single contact
+    public int updatePerson(Person person) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, person.getName());
+
+        // updating row
+        return db.update(TABLE_NAMES, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(person.getId()) });
+    }
+
+
 }

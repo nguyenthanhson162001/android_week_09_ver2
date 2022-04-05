@@ -24,10 +24,11 @@
             android:gravity="center|left"
             android:text="name"
             android:textColor="#000000"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/edit"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
@@ -35,7 +36,7 @@
             app:srcCompat="@drawable/edit" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/delete"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

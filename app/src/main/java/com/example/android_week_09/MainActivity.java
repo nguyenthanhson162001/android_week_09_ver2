@@ -2,8 +2,10 @@ package com.example.android_week_09;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -11,32 +13,17 @@ import android.widget.ListView;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private    ListView listView;
-    private DatabaseHandlerList databaseHandlerList;
+    public static DatabaseHandlerList databaseHandlerList;
+    private static AdapterView<ListAdapter> listView;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          databaseHandlerList = new DatabaseHandlerList(this);
-//
-//        // Inserting Contacts
-//        Log.d("Insert: ", "Inserting ..");
-//        db.addContact(new Contact("Ravi", "9100000000"));
-//        db.addContact(new Contact("Srinivas", "9199999999"));
-//        db.addContact(new Contact("Tommy", "9522222222"));
-//        db.addContact(new Contact("Karthik", "9533333333"));
-//
-//        // Reading all contacts
-//        Log.d("Reading: ", "Reading all contacts..");
-//        List<Contact> contacts = db.getAllContacts();
-//
-//        for (Contact cn : contacts) {
-//            String log = "Id: " + cn.getID() + " ,Name: " + cn.getName() + " ,Phone: " +
-//                    cn.getPhoneNumber();
-//            // Writing Contacts to log
-//            Log.d("Name: ", log);
-//        }
+        context = this;
+
 
          listView = findViewById(R.id.listView);
         EditText  name = findViewById(R.id.editTextTextPersonName);
@@ -55,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
-    public  void loadListView( ){
+    public static void loadListView(){
         List<Person> persons = databaseHandlerList.getPersons();
 
 //        for (Person cn : persons) {
@@ -64,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 //            // Writing Contacts to log
 //            Log.d("LOG: ", log);
 //        }
-        ListAdapter listAdapter = new ListAdapter(persons, R.layout.activity_item_adapterd,this);
+        ListAdapter listAdapter = new ListAdapter(persons, R.layout.activity_item_adapterd,context);
         listView.setAdapter(listAdapter);
 
     }
